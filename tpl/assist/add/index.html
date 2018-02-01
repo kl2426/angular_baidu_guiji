@@ -1,0 +1,61 @@
+<!--  定时 - 添加   -->
+<div ui-view class="g-main">
+	<div class="m-header">
+		<div class="m-header-body">
+			<div class="header-left">
+				<!--  选择设备  -->
+				<div class="header-select hidden">
+					<a class="header-btn" ng-click="select_checked = !select_checked">选择设备<i class="fa fa-fw fa-angle-down"></i></a>
+					<div ng-class="{'hidden':select_checked != true}">
+						<div class="select-ul">
+							<ul>
+								<li ng-repeat="item in data.device_items" ng-click="device_checked(item)"><i ng-class="{'icon-checked':item.checked}"></i><span>{{item.name}}</span></li>
+							</ul>
+						</div>
+						<div class="select-btn">
+							<a ng-click="device_checked_all()">全选</a>
+							<a ng-click="select_checked = !select_checked;select_checked_ok()">确定</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="m-area m-timing">
+		<div class="timing-body">
+			<div class="timing-col clearfix">
+				<div class="">
+					<div class="text-center" ng-hide="data.form.operate != 'edit'">
+						<span>名称：</span>
+						<input class="form-control" ng-model="data.form.title" type="text" style="display: inline-block; width: 200px;" />
+					</div>
+					<div class="m-locus-menu" style="position: relative;">
+						<div class="locus-menu" style="background-color: transparent;">
+							<div class="menu-one">
+								<a class="one-span"><i class=""></i><span>选择人员</span><i class="fa fa-fw fa-angle-down"></i></a>
+								<ul style="width: 140px;left: 14px;">
+									<li ng-repeat="item in data.device_items">
+										<a style="{{item.checked_banan ? 'color: #ffd302' : ''}}"><i ng-class="{'icon-checked':item.checked}"></i><span>{{item.mobile}}</span><i class="fa fa-fw fa-angle-right"></i></a>
+										<div>
+											<ul>
+												<li ng-click="banAn('banan', item, !item.checked_banan)"><a><i ng-class="{'icon-checked':item.checked_banan}"></i><span>办案人员</span></a></li>
+												<li ng-click="banAn('xiezhu',item, !item.checked_xiezhu)"><a><i ng-class="{'icon-checked':item.checked_xiezhu}"></i><span>协助人员</span></a></li>
+											</ul>
+										</div>
+									</li>
+									<li class="one-li-btn">
+										<a ng-click="device_checked_all()">全选</a>
+										<a>确定</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="timing-btn text-center"><a class="btn btn-info" ng-click="send()">提交</a></div>
+		</div>
+		
+	</div>
+</div>

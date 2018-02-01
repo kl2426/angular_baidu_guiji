@@ -1,0 +1,33 @@
+<!--  定时   -->
+<div ui-view class="g-main">
+	<div class="m-header">
+		<div class="m-header-body">
+			<div class="header-left">
+				<a class="header-btn" ng-click="add()">
+					<i class="icon-new"></i>新建定时
+				</a>
+			</div>
+		</div>
+	</div>
+	
+	<div class="m-area">
+		<ul class="area-ul">
+			<li ng-repeat="item in data.items">
+				<div class="m-area-one">
+					<h3>{{item.name}}</h3>
+					<div class="list">
+						<a ng-repeat="item2 in item.tsbs">{{item2.mcode}}</a>
+					</div>
+					<div class="mor">
+						<!--<a class="mor-mor">...</a>-->
+						<div class="mor-edit">
+							<!--<a>编辑</a>-->
+							<a ng-click="timingDel(item)">删除</a>
+						</div>
+					</div>
+				</div>
+			</li>
+			<div class="area-none" ng-if="data.items.length < 1"><img src="img/icon-002.png" /><p>没有任何信息</p></div>
+		</ul>
+	</div>
+</div>

@@ -1,0 +1,87 @@
+<!--  轨迹   -->
+<div ui-view class="g-main">
+	
+	<!--<div class="m-header">
+		<div class="m-header-body">
+			<div class="header-left">
+				<a class="header-btn" ng-if="status == 'icon'" ng-click="show_icon_line('line')">轨迹</a>
+				<a class="header-btn" ng-if="status == 'line'" ng-click="show_icon_line('icon')">单点</a>
+			</div>
+		</div>
+	</div>-->
+	
+	<div style="position: absolute; top: 13px; left: 70px; z-index: 1;">
+		<a class="btn btn-info" ng-if="status == 'icon'" ng-click="show_icon_line('line')">轨迹</a>
+		<a class="btn btn-info" ng-if="status == 'line'" ng-click="show_icon_line('icon')">单点</a>
+	</div>
+	
+	<div class="m-select-user" style="position: absolute; top: 13px; right: 30px; z-index: 1;">
+		<a class="btn btn-info">选择设备</a>
+		<div>
+			<ul>
+				<li ng-repeat="item in data.device_items" ng-click="device_checked(item)">
+					<a><i ng-class="{'icon-checked':item.checked}"></i><span>{{item.mobile}}</span></a>
+				</li>
+			</ul>
+			<div>
+				<a ng-click="device_checked_all()">全选</a>
+				<a>&nbsp;</a>
+			</div>
+		</div>
+	</div>
+	
+	<div style="position: absolute; bottom: 20px; right: 30px; z-index: 1;">
+		<a class="btn btn-info" ng-disabled="data.video_items.length < 1" ui-sref="app.locus.list" style="border-radius: 40px;">
+			<img style="width: 18px; height: 18px; vertical-align: top;" src="img/locus/icon-play02.png" />
+			全部视频
+		</a>
+	</div>
+	
+	<div class="m-locus">
+		<div baidu-map id="allmap">百度地图</div>
+		<div class="m-locus-menu" ng-repeat="item in data.user_items" ng-hide="!item.checked">
+			<div class="locus-bg" ng-click="item.checked=false"></div>
+			<div class="locus-menu">
+				<a class="btn hidden" ng-click="video_play(item)"><i class="icon-sxt"></i><span>实时视频播放</span></a>
+				<div style="margin-bottom: 10px; text-align: center;color: #fff;">{{item.mobile}}</div>
+				<div class="menu-one" ng-hide="!(item.hasVideo == '1')">
+					<a class="one-span"><i class="icon-sxt"></i><span>实时视频</span><i class="fa fa-fw fa-angle-down"></i></a>
+					<ul>
+						<li class="hidden" ng-disabled="!item.video_isopen">
+							<a class="btn" ng-disabled="!item.video_isopen"><i class="icon-locusplay"></i><span>视频转发</span><i class="fa fa-fw fa-angle-right"></i></a>
+							<div>
+								<ul>
+									<li ng-repeat="item in data.device_items" ng-click="device_checked(item)">
+										<a><i ng-class="{'icon-checked':item.checked}"></i><span>{{item.mobile}}</span></a>
+									</li>
+								</ul>
+								<div>
+									<a ng-click="device_checked_all()">全选</a>
+									<a ng-click="transfer(item)">确定</a>
+								</div>
+							</div>
+						</li>
+						<li class="hidden">
+							<a ng-click="sendorder(item, '2')"><i class="icon-sxiang"></i><span>切换摄像头</span></a>
+						</li>
+						<li class="hidden">
+							<a class="btn" ng-click="video_play(item)"><i class="icon-sxt"></i><span>实时视频播放</span></a>
+						</li>
+						<li>
+							<a ng-click="sendorder(item, '1')" ng-if="!item.video_isopen"><i class="icon-sxiang2"></i><span>打开摄像头</span></a>
+							<a ng-click="sendorder(item, '3')" ng-if="item.video_isopen"><i class="icon-sxiang2"></i><span>关闭摄像头</span></a>
+						</li>
+					</ul>
+				</div>
+				<div class="menu-one">
+					<a class="one-span" ng-click="item.locus_show_msg = !item.locus_show_msg"><i class="icon-sxiang"></i><span>发送信息</span><i></i></a>
+					<div class="one-msg" ng-hide="!item.locus_show_msg">
+						<textarea id="locus_msg" ng-model="data.form.msg" rows="4" placeholder="输入要发送的信息"></textarea>
+						<button ng-click="item.locus_show_msg = !item.locus_show_msg; sendmsg(item.id, data.form.msg)">发送</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+</div>

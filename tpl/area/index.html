@@ -1,0 +1,79 @@
+<!--  区域   -->
+<!--加载鼠标绘制工具-->
+<script type="text/javascript" src="http://api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager_min.js"></script>
+<link rel="stylesheet" href="http://api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager_min.css" />
+<!--加载检索信息窗口-->
+<script type="text/javascript" src="http://api.map.baidu.com/library/SearchInfoWindow/1.4/src/SearchInfoWindow_min.js"></script>
+<link rel="stylesheet" href="http://api.map.baidu.com/library/SearchInfoWindow/1.4/src/SearchInfoWindow_min.css" />
+
+<style>
+	.BMapLib_Drawing{display: none;}
+</style>
+
+<div ui-view class="g-main">
+	<div class="m-header">
+		<div class="m-header-body">
+			<div class="header-left">
+				<!--    -->
+				<a class="header-btn" ng-click="add()" ng-if="status == 'list'">
+					<i class="icon-new"></i>新建区域
+				</a>
+				
+				
+				<!--  画区域     -->
+				<div class="baidu-qy" ng-if="status == 'map'" ng-class="{'active':quyu_active}" ng-click="quyu_click()">
+					<i class="icon-qy"></i>区域选择
+				</div>
+				
+				<!--  选择设备  -->
+				<div class="header-select" ng-if="status == 'map'" ng-class="{'active':select_checked}">
+					<a class="header-btn" ng-click="select_checked = !select_checked">选择设备<i class="fa fa-fw fa-angle-down"></i></a>
+					<div ng-class="{'hidden':select_checked != true}">
+						<div class="select-ul">
+							<ul>
+								<li ng-repeat="item in data.device_items" ng-click="device_checked(item)"><i ng-class="{'icon-checked':item.checked}"></i><span>{{item.mobile}}</span></li>
+							</ul>
+						</div>
+						<div class="select-btn">
+							<a ng-click="device_checked_all()">全选</a>
+							<a ng-click="select_checked = !select_checked">确定</a>
+						</div>
+					</div>
+				</div>
+				
+				<a class="header-btn" ng-click="sendAdd()" ng-if="status == 'map'">
+					完成
+				</a>
+				<a class="header-btn" ng-click="show_list()" ng-if="status == 'map'" style="margin-left: 1px;">
+					取消
+				</a>
+				
+			</div>
+		</div>
+	</div>
+	
+	<div class="m-locus" ng-if="status == 'map'">
+		<div baidu-map id="allmap">百度地图</div>
+	</div>
+	
+	<div class="m-area" ng-if="status == 'list'">
+		<ul class="area-ul">
+			<li ng-repeat="item in data.items">
+				<div class="m-area-one">
+					<h3>{{item.name}}</h3>
+					<div class="list">
+						<a ng-repeat="item2 in item.lsb">{{item2.mcode}}</a>
+					</div>
+					<div class="mor">
+						<!--<a class="mor-mor">...</a>-->
+						<div class="mor-edit">
+							<!--<a>编辑</a>-->
+							<a ng-click="ridDel(item.id)">删除</a>
+						</div>
+					</div>
+				</div>
+			</li>
+			<div class="area-none" ng-if="data.items.length < 1"><img src="img/icon-002.png" /><p>没有任何信息</p></div>
+		</ul>
+	</div>
+</div>

@@ -1,0 +1,16 @@
+<!--  服务器IP配置  弹窗   -->
+<div class="modal-header g-modal-header" modal-move>
+	<button type="button" class="close"  ng-click="cancel()"><span aria-hidden="true">&times;</span></button>
+	<h4 class="modal-title"></h4>
+</div>
+<div class="modal-body g-modal-body m-area-modal">
+	<div class="body-body">
+		<div class="span">设置区域名称</div>
+		<div class="input"><input type="text" ng-model="title" maxlength="16" /></div>
+	</div>
+</div>
+
+<div class="modal-footer g-modal-footer">
+    <button type="button" class="btn btn-default" ng-click="cancel()">取消</button>
+    <button type="button" class="btn btn-info" ng-click="ok()">保存</button>
+</div>

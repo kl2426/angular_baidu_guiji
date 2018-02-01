@@ -1,0 +1,75 @@
+<!--  统计   -->
+
+<div ui-view class="g-main">
+	<div class="m-header">
+		<div class="m-header-body">
+			<div class="header-left">
+				
+				<!--  选择设备  -->
+				<div class="header-select" ng-class="{'active':select_checked}">
+					<a class="header-btn" style="padding: 0 20px;" ng-click="select_checked = !select_checked">选择设备<i class="fa fa-fw fa-angle-down"></i></a>
+					<div ng-class="{'hidden':select_checked != true}">
+						<div class="select-ul">
+							<ul>
+								<li ng-repeat="item in data.device_items" ng-click="device_checked(item)"><i ng-class="{'icon-checked':item.checked}"></i><span>{{item.mobile}}</span></li>
+							</ul>
+						</div>
+						<div class="select-btn">
+							<a ng-click="device_checked_all()">&nbsp;</a>
+							<a ng-click="select_checked = !select_checked;select_checked_ok()">确定</a>
+						</div>
+					</div>
+				</div>
+				
+				<!--   日期时间选择    -->
+				<div class="header-date" style="margin-left: 10px;">
+					起止日期&nbsp;&nbsp;
+					<div class="date-input">
+						<input type="text" lay-date data-laytype="datetime" data-scope="data.form.start" />
+						<i class="icon-date"></i>
+					</div>&nbsp;
+					<span>-</span>&nbsp;
+					<div class="date-input">
+						<input type="text" lay-date data-laytype="datetime" data-scope="data.form.end" />
+						<i class="icon-date"></i>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+	
+	
+	<div class="m-count">
+		<h3>{{data.form.device[0].mobile}}</h3>
+		<h2>
+			<label><input type="radio" name="count" ng-click="data.form.type = 1" />行动距离</label>
+			<label><input type="radio" name="count" checked="checked" ng-click="data.form.type = 2" />上传视频数量</label>
+		</h2>
+		<div class="count-chart">
+	        <div class="panel panel-default">
+	          <div class="panel-body">
+	            <div ng-if="data.count_x.length > 0" ui-jq="plot" ui-options="
+	              [
+	                { data: {{data.count_y}}, points: { show: true, radius: 6}, splines: { show: true, tension: 0.45, lineWidth: 5, fill: 0 } }
+	              ], 
+	              {
+	                colors: ['{{app.color.info}}'],
+	                series: { shadowSize: 3 },
+	                xaxis:{ 
+	                  font: { color: '#ccc' },
+	                  position: 'bottom',
+	                  ticks: {{data.count_x}}
+	                },
+	                yaxis:{ font: { color: '#ccc' } },
+	                grid: { hoverable: true, clickable: true, borderWidth: 0, color: '#ccc' },
+	                tooltip: true,
+	                tooltipOpts: { content: '{{data.form.type == 1 ? '距离：' : '数量：'}}%y',  defaultTheme: false, shifts: { x: 0, y: 20 } }
+	              }
+	            " style="height:300px" >
+	            </div>
+	          </div>
+	        </div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,41 @@
+
+
+<!--  视频播放  弹窗   -->
+<div ng-mouseover="hoverStart()" ng-mouseleave="hoverEnd()">
+	<div class="modal-header g-modal-header" modal-move ng-class="{'hover':hasHover}">
+		<button type="button" class="close"  ng-click="cancel()"><span aria-hidden="true">&times;</span></button>
+		<h4 class="modal-title">
+			设备：{{data.user_item.mobile}}
+			<div class="play-menu">
+				<div class="menu-one">
+					<img src="img/locus/icon-play03.png" title="转发" />
+					<div>
+						<ul>
+							<li ng-repeat="item in data.device_items" ng-click="device_checked(item)">
+								<a><i ng-class="{'icon-checked':item.checked}"></i><span>{{item.mobile}}</span></a>
+							</li>
+						</ul>
+						<div>
+							<a ng-click="device_checked_all()">全选</a>
+							<a ng-click="transfer()">确定</a>
+						</div>
+					</div>
+				</div>
+				<div class="menu-one" ng-click="sendorder(items.item, '2')"><img src="img/locus/icon-play02.png" title="切换摄像头" /></div>
+				<div class="menu-one" ng-click="sendorder(items.item, '3')"><img src="img/locus/icon-play01.png" title="关闭摄像头" /></div>
+			</div>
+		</h4>
+	</div>
+	<div class="modal-body g-modal-body m-area-modal">
+		<div class="body-body">
+			<div id="id_video_container" tengxun-video data-id="id_video_container" data-liveflv="{{items.item.flvLiveplay}}" data-livem3u8="{{items.item.hlsLiveplay}}" style="width:100%; height:auto;"></div>
+		</div>
+	</div>
+	
+	<div class="modal-footer g-modal-footer hidden">
+	    <button type="button" class="btn btn-default" ng-click="cancel()">取消</button>
+	    <button type="button" class="btn btn-info" ng-click="ok()">保存</button>
+	</div>
+	
+
+</div>

@@ -1,0 +1,83 @@
+<!--  历史   -->
+
+<div ui-view class="g-main">
+	<div class="m-header">
+		<div class="m-header-body">
+			<div class="header-left">
+				
+				<!--  选择设备  -->
+				<div class="header-select" ng-class="{'active':select_checked}">
+					<a class="header-btn" style="padding: 0 20px;" ng-click="select_checked = !select_checked">选择设备<i class="fa fa-fw fa-angle-down"></i></a>
+					<div ng-class="{'hidden':select_checked != true}">
+						<div class="select-ul">
+							<ul>
+								<li ng-repeat="item in data.device_items" ng-click="device_checked(item)"><i ng-class="{'icon-checked':item.checked}"></i><span>{{item.mobile}}</span></li>
+							</ul>
+						</div>
+						<div class="select-btn">
+							<a ng-click="device_checked_all()">&nbsp;</a>
+							<a ng-click="select_checked = !select_checked;select_checked_ok()">确定</a>
+						</div>
+					</div>
+				</div>
+				
+				<!--   日期时间选择    -->
+				<div class="header-date" style="margin-left: 10px;">
+					起止日期&nbsp;&nbsp;
+					<div class="date-input">
+						<input type="text" lay-date data-laytype="datetime" data-scope="data.form.start" />
+						<i class="icon-date"></i>
+					</div>&nbsp;
+					<span>-</span>&nbsp;
+					<div class="date-input">
+						<input type="text" lay-date data-laytype="datetime" data-scope="data.form.end" />
+						<i class="icon-date"></i>
+					</div>
+				</div>
+				
+				<!--   地图模式切换     -->
+				<div class="header-btn" style="margin-left: 10px;" ng-click="select_status()">
+					<span ng-if="status == 'list'">地图模式</span>
+					<span ng-if="status == 'map'">列表模式</span>
+				</div>
+				
+				
+				<!--   -->
+				<div class="header-search hidden">
+					<!-- search form -->
+			        <form class="navbar-form navbar-form-sm navbar-left shift" ui-shift="prependTo" target=".navbar-collapse" role="search" ng-controller="TypeaheadDemoCtrl">
+			          <div class="form-group">
+			            <div class="input-group">
+			              <input type="text" ng-model="selected" typeahead="state for state in states | filter:$viewValue | limitTo:8" class="form-control input-sm bg-light no-border rounded padder" placeholder="">
+			              <span class="input-group-btn">
+			                <button type="submit" class="btn btn-sm bg-light rounded"><i class="fa fa-search"></i></button>
+			              </span>
+			            </div>
+			          </div>
+			        </form>
+			        <!-- / search form -->
+				</div>
+				
+				
+			</div>
+		</div>
+	</div>
+	
+	<div class="m-locus" ng-class="{'hidden':status != 'map'}">
+		<div baidu-map id="allmap">百度地图</div>
+	</div>
+	
+	<div class="m-area" ng-if="status == 'list'">
+		<ul class="m-history-list">
+			<li>
+				<div class="m-history-list-one">
+					<h4>{{data.form.device[0].nick ? data.form.device[0].nick : data.form.device[0].mobile}}</h4>
+					<ul>
+						<li ng-repeat="item in data.items"><span>{{item.updateTime}}</span><i class="icon-play" ng-if="item.has_video"></i></li>
+					</ul>
+				</div>
+			</li>
+		</ul>
+		<div class="area-none" ng-if="data.items.length < 1"><img src="img/icon-002.png" /><p>没有任何信息</p></div>
+	</div>
+</div>

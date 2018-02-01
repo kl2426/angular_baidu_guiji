@@ -1,0 +1,46 @@
+<!--  设置   -->
+
+<div ui-view class="g-main">
+	<div class="m-header">
+		<div class="m-header-body">
+			<div class="header-left">
+				
+				<!--  -->
+				<a class="header-btn" ng-click="add('add',{})">
+					<i class="icon-new"></i>添加设备
+				</a>
+				
+				<!--  -->
+				<a class="header-btn hidden" ng-click="add_water()" style="margin-left: 1px;">
+					<i class="icon-new"></i>添加水印
+				</a>
+				
+			</div>
+		</div>
+	</div>
+	
+	
+	
+	<!--    -->
+	<div class="m-site">
+		<table>
+			<tr>
+				<!--<th>设备</th>-->
+				<th>昵称</th>
+				<th>手机</th>
+				<th></th>
+			</tr>
+			<tr ng-repeat="item in data.items">
+				<!--<td>{{item.mcode}}</td>-->
+				<td>{{item.nick}}</td>
+				<td>{{item.mobile}}</td>
+				<td class="text-right">
+					<a class="btn btn-info" ng-click="add('edit',item)">修改</a>
+					<a class="btn btn-info" ng-click="siteDel(item)">删除</a>
+				</td>
+			</tr>
+		</table>
+	</div>
+	
+	
+</div>

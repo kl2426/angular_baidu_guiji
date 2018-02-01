@@ -1,0 +1,48 @@
+<!--  轨迹   -->
+<div ui-view class="g-main">
+	
+	<div class="m-header">
+		<div class="m-header-body">
+			<div class="header-left">
+				<a class="header-btn" ui-sref="app.locus">返回</a>
+			</div>
+		</div>
+	</div>
+	
+	<div class="m-locus">
+		<div class="locus-list clearfix" style="margin: 10px;">
+			<div ng-repeat="(key,item) in items" style="float: left;margin: 10px;position: relative;" ng-mouseover="hoverStart(item)" ng-mouseleave="hoverEnd(item)">
+				<div class="m-video-header" ng-class="{'hover':item.hasHover}">
+					<h4 class="modal-title">
+						设备：{{item.mobile}}
+						<div class="play-menu">
+							<div class="menu-one">
+								<img src="img/locus/icon-play03.png" title="转发" />
+								<div>
+									<ul>
+										<li ng-repeat="item in data.device_items" ng-click="device_checked(item)">
+											<a><i ng-class="{'icon-checked':item.checked}"></i><span>{{item.mobile}}</span></a>
+										</li>
+									</ul>
+									<div>
+										<a ng-click="device_checked_all()">全选</a>
+										<a ng-click="transfer(item.user_item)">确定</a>
+									</div>
+								</div>
+							</div>
+							<div class="menu-one" ng-click="sendorder(item.user_item, '2')"><img src="img/locus/icon-play02.png" title="切换摄像头" /></div>
+							<div class="menu-one" ng-click="sendorder(item.user_item, '3')"><img src="img/locus/icon-play01.png" title="关闭摄像头" /></div>
+						</div>
+					</h4>
+				</div>
+				<div tengxun-video data-id="id_video_container{{key}}" data-width="400" data-height="300" data-liveflv="{{item.flvLiveplay}}" data-livem3u8="{{item.hlsLiveplay}}" style="width:100%; height:auto;"></div>
+			</div>
+			<div class="m-area">
+				<ul class="area-ul">
+					<div class="area-none" ng-if="items.length < 1"><img src="img/icon-002.png" /><p>没有任何信息</p></div>
+				</ul>
+			</div>
+		</div>
+	</div>
+	
+</div>

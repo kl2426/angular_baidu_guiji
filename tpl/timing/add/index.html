@@ -1,0 +1,39 @@
+<!--  定时 - 添加   -->
+<div ui-view class="g-main">
+	<div class="m-header">
+		<div class="m-header-body">
+			<div class="header-left">
+				<!--  选择设备  -->
+				<div class="header-select">
+					<a class="header-btn" ng-click="select_checked = !select_checked">选择设备<i class="fa fa-fw fa-angle-down"></i></a>
+					<div ng-class="{'hidden':select_checked != true}">
+						<div class="select-ul">
+							<ul>
+								<li ng-repeat="item in data.device_items" ng-click="device_checked(item)"><i ng-class="{'icon-checked':item.checked}"></i><span>{{item.mobile}}</span></li>
+							</ul>
+						</div>
+						<div class="select-btn">
+							<a ng-click="device_checked_all()">全选</a>
+							<a ng-click="select_checked = !select_checked;select_checked_ok()">确定</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="m-area m-timing">
+		<div class="timing-body">
+			<div class="timing-col clearfix">
+				<div class="col-xs-6">
+					<input class="form-control" type="text" lay-date data-laytype="datetime" data-scope="data.form.start" placeholder="请选择开始时间" />
+				</div>
+				<div class="col-xs-6">
+					<input class="form-control" type="text" lay-date data-laytype="datetime" data-scope="data.form.end" placeholder="请选择结束时间" />
+				</div>
+			</div>
+			<div class="timing-btn text-center"><a class="btn btn-info" ng-click="send()">提交</a></div>
+		</div>
+		
+	</div>
+</div>

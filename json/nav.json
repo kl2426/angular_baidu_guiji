@@ -1,0 +1,13 @@
+{
+	"code": 0,
+	"msg":"",
+	"data": [
+		{"id":1, "name":"轨迹", "icon":"icon-nav1", "href":"app.locus"},
+		{"id":2, "name":"区域", "icon":"icon-nav2", "href":"app.area"},
+		{"id":3, "name":"定时", "icon":"icon-nav3", "href":"app.timing"},
+		{"id":4, "name":"协作", "icon":"icon-nav4", "href":"app.assist"},
+		{"id":5, "name":"历史", "icon":"icon-nav5", "href":"app.history"},
+		{"id":6, "name":"统计", "icon":"icon-nav6", "href":"app.count"},
+		{"id":7, "name":"设置", "icon":"icon-nav7", "href":"app.site"}
+	]
+}
